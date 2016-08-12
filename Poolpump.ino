@@ -7,8 +7,8 @@
 #include <TimeLib.h>
 #include <SimpleTimer.h>
 
-const char *ssid = "ib4tl";
-const char *password = "allyourbase";
+const char *ssid = "";
+const char *password = "";
 
 // Basic variables
 ESP8266WebServer server(80);
