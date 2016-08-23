@@ -35,7 +35,7 @@ SimpleTimer timer; // timer to get the time from NTP server
 
 // Pump specific stuff
 boolean isPoolPumpOn = false;
-int onTimeAM = 5;  // On at 5am
+int onTimeAM = 4;  // On at 4am
 int offTimeAM = 9; // Off at 9am
 int onTimePM = 17; // On at 5pm
 int offTimePM = 21; // Off at 9pm;
@@ -276,22 +276,33 @@ String getStatus()
   String message = "Currently configured time: ";
   message += hour();
   message += ":";
-  message += minute();
+  message += getFormatted(minute());
   message += ":";
-  message += second();
+  message += getFormatted(second());
   message += " ";
   message += year();
   message += "-";
-  message += month();
+  message += getFormatted(month());
   message += "-";
-  message += day();
+  message += getFormatted(day());
   message += "<br/>";
-  message += "Manual pool pump switching mode: ";
-  message += isManualMode ? "true" : "false";
+  message += "Manual switching mode: ";
+  message += isManualMode ? "YES" : "NO";
   message += "<br/>";
   message += "Is pool pump running: ";
-  message += isPoolPumpOn ? "true" : "false";
+  message += isPoolPumpOn ? "YES" : "NO";
   return message;
+}
+
+String getFormatted(int digits)
+{
+  String formatted;
+  if(digits < 10)
+  {
+    formatted += "0";
+  }
+  formatted += digits;
+  return formatted;
 }
 
 void moveServoToOffPosition(void)
