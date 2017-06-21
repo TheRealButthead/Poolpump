@@ -70,7 +70,7 @@ void setup(void)
   Serial.println(udp.localPort());
 
   // Webserver
-  if (MDNS.begin("esp8266"))
+  if (MDNS.begin("poolpump"))
   {
     Serial.println("MDNS responder started");
   }
@@ -228,7 +228,7 @@ void handleRoot()
       });\
       $('#updatetime_button').click(function(){\
         $('div.panel-body').html(\"\");\
-        $.get('/status', function(data){\
+        $.get('/updatetime', function(data){\
           $('div.panel-body').html(data);\
         });\
       });\
@@ -286,11 +286,11 @@ String getStatus()
   message += "-";
   message += getFormatted(day());
   message += "<br/>";
-  message += "Manual switching mode: ";
-  message += isManualMode ? "YES" : "NO";
+  message += "Switching mode: ";
+  message += isManualMode ? "MANUAL" : "AUTOMATIC";
   message += "<br/>";
-  message += "Is pool pump running: ";
-  message += isPoolPumpOn ? "YES" : "NO";
+  message += "Pump status: ";
+  message += isPoolPumpOn ? "RUNNING" : "NOT RUNNING";
   return message;
 }
 
@@ -427,4 +427,3 @@ time_t getNtpTime()
   Serial.println("No NTP Response :-(");
   return 0; // return 0 if unable to get the time
 }
-
